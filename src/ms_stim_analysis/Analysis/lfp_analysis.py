@@ -6,7 +6,6 @@ import matplotlib.gridspec as gridspec
 from scipy import signal
 from tqdm import tqdm
 import pywt
-import logging
 
 import spyglass.common as sgc
 from spyglass.common import (
@@ -43,12 +42,6 @@ from .circular_shuffle import (
 )
 from ms_stim_analysis.Style.style_guide import interval_style
 
-logger = logging.getLogger("example_logger")
-logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler("/wtrack_lfp.log")
-file_handler.setLevel(logging.INFO)
-logger.addHandler(file_handler)
-
 
 LFP_AMP_CUTOFF = 2000
 
@@ -60,9 +53,6 @@ def get_yaml_defined_reference_electrode(key: dict) -> int:
     electrode_group_name = (ElectrodeGroup & key & {"description": "reference"}).fetch(
         "electrode_group_name"
     )[0]
-    logger.info(f"key: {key}")
-    logger.info(f"electrode_group_name: {electrode_group_name}")
-    logger.info("     ")
     e_group_name_list = (
         LFPV1 & key & {"electrode_group_name": electrode_group_name}
     ).fetch("lfp_electrode_group_name")
