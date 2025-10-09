@@ -441,7 +441,7 @@ class TrackCellCoverage(SpyglassMixin, dj.Computed):
         return nwb[0]["coverage"]
 
 
-"""
+'''
 Not used in final paper, but could be useful for future analyses
 Commenting out for now to avoid errors on declaration in Docker container
 
@@ -511,3 +511,4 @@ class DecodesToCoveredTrack(SpyglassMixin, dj.Computed):
             intervals.append([time[s], time[e]])
         return np.array(intervals)
 """
+'''
