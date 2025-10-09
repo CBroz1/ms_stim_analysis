@@ -45,7 +45,7 @@ from ms_stim_analysis.Style.style_guide import interval_style
 
 logger = logging.getLogger("example_logger")
 logger.setLevel(logging.INFO)
-file_handler = logging.FileHandler("/home/sambray/Desktop/wtrack_lfp.log")
+file_handler = logging.FileHandler("/wtrack_lfp.log")
 file_handler.setLevel(logging.INFO)
 logger.addHandler(file_handler)
 

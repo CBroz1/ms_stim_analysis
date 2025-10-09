@@ -10,9 +10,9 @@ import spyglass.spikesorting as sgs
 # print(os.curdir)
 import sys
 
-sys.path.append("/home/sambray/Documents/MS_analysis_samsplaying/")
-from ms_opto_stim_protocol import OptoStimProtocol
-from Analysis.lfp_analysis import get_ref_electrode_index
+
+from ms_stim_analysis.AnalysisTables.ms_opto_stim_protocol import OptoStimProtocol
+from ms_stim_analysis.Analysis.lfp_analysis import get_ref_electrode_index
 from spyglass.common import Session, PositionIntervalMap
 
 from spyglass.spikesorting import spikesorting_pipeline_populator, SortGroup
