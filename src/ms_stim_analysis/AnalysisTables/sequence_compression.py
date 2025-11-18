@@ -38,13 +38,13 @@ class CompressionIndexParams(SpyglassMixin, dj.Lookup):
     """
 
     contents = [
-        ("fast", 10, 100, 5, 10, 150, 33, 30, False, 100),
-        ("default", 10, 100, 5, 10, 100, 33, 30, False, 80),
-        ("slow", 10, 100, 5, 10, 1000, 250, 30, False, 1000),
-        ("fast_graph_distance", 10, 100, 5, 10, 150, 33, 30, True, 100),
-        ("default_graph_distance", 10, 100, 5, 10, 100, 33, 30, True, 80),
-        ("slow_graph_distance", 10, 100, 5, 10, 1500, 250, 30, True, 2000),
-        ("cross_method_graph_distance", 10, 100, 5, 1, 1000, 10, 30, True, 80),
+        ("fast", 10, 100, 5, 10, 150, 33, 30, False, 100, np.nan),
+        ("default", 10, 100, 5, 10, 100, 33, 30, False, 80, np.nan),
+        ("slow", 10, 100, 5, 10, 1000, 250, 30, False, 1000, np.nan),
+        ("fast_graph_distance", 10, 100, 5, 10, 150, 33, 30, True, 100, np.nan),
+        ("default_graph_distance", 10, 100, 5, 10, 100, 33, 30, True, 80, np.nan),
+        ("slow_graph_distance", 10, 100, 5, 10, 1500, 250, 30, True, 2000, np.nan),
+        ("cross_method_graph_distance", 10, 100, 5, 1, 1000, 10, 30, True, 80, np.nan),
     ]
 
 
