@@ -38,7 +38,12 @@ source = "vcs"
 version-file = "src/ms_stim_analysis/_version.py"
 
 [tool.hatch.build.targets.sdist]
-exclude = [".git_archival.txt"]
+exclude = [".git_archival.txt",
+    "*.ipynb",
+    "notebooks/*",
+    "populators/*",
+    "_api.txt",
+    "examples/*",]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ms_stim_analysis"]
