@@ -7,9 +7,6 @@ from spyglass.common import (
 from spyglass.position.v1 import TrodesPosV1, DLCPosV1
 from spyglass.position import PositionOutput
 from spyglass.linearization.v1 import LinearizedPositionV1, TrackGraph
-from spyglass.decoding.v1.clusterless import ClusterlessDecodingV1
-from spyglass.decoding.v1.sorted_spikes import SortedSpikesDecodingV1
-
 
 from ms_stim_analysis.AnalysisTables.ms_task_identification import TaskIdentification
 from ms_stim_analysis.AnalysisTables.ms_interval import EpochIntervalListName
