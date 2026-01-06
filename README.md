@@ -34,17 +34,26 @@ To install the package with custom analysis tables and run the associated notebo
 
 If you want to apply the analysis pipelines to new datasets, you can install the package and use the custom tables together with your existing database and the `spyglass` ecosystem.
 
-### Reuse and Replication
+### Reuse and Replication (Recommended!)
 
-All raw data and derived results (e.g., spike sorting, LFP) will be made available through the DANDI archive *(upcoming)*.
+All raw data and derived results (e.g., spike sorting, LFP) are available through the [DANDI archive](https://dandiarchive.org/dandiset/001634)
 
-We also plan to release a Docker image that includes:
+We have also released a docker images for easy access and use of this paper's results
+This includes:
 
-- a pre-built conda environment
+- a pre-built conda environment with all necessary packages
 - the notebooks from this repository, and
 - a populated SQL database with all information needed to query and retrieve results from the DANDI archive.
 
-(*Docker build in progress*)
+**Docker Container instructions**
+
+1. Install Docker on your local machine
+2. Download and unzip [this directory](medial_septum_docker.zip)
+3. Navigate to the unzipped directory in your terminal
+4. Run: ```docker compose -f docker-compose-collab.yml up -d```
+5. In a web browser, navigate to `localhost:8888/lab/tree/notebooks` and log in with the password `ms_stim_analysis`
+
+This will land you at a jupyter hub with the figure-generating notebooks for this project and access to a pre-populated instance of the spyglass database.
 
 ### **Associated repositories**
 
