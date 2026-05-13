@@ -42,7 +42,6 @@ from .circular_shuffle import (
 )
 from ms_stim_analysis.Style.style_guide import interval_style
 
-
 LFP_AMP_CUTOFF = 2000
 
 
@@ -219,7 +218,11 @@ def get_control_test_power_spectrum(
                 [],
                 [],
             )
-        run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
+        run_intervals = (
+            Interval(np.array(run_intervals))
+            .intersect(np.array(valid_position_intervals))
+            .times
+        )
 
     from .utils import get_running_valid_intervals
 
@@ -284,8 +287,12 @@ def get_control_test_power_spectrum(
             [],
             [],
         )
-    optogenetic_run_interval = Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
-    control_run_interval = Interval(control_run_interval).intersect(non_noise_intervals).times
+    optogenetic_run_interval = (
+        Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
+    )
+    control_run_interval = (
+        Interval(control_run_interval).intersect(non_noise_intervals).times
+    )
 
     window_size = int(np.round(window / np.mean(np.diff(lfp_timestamps))))
     # load the stimulus data if requested
@@ -421,7 +428,11 @@ def get_control_test_power_spectrum_full_probe(
                 [],
                 [],
             )
-        run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
+        run_intervals = (
+            Interval(np.array(run_intervals))
+            .intersect(np.array(valid_position_intervals))
+            .times
+        )
 
     # # determine if each interval is in the optogenetic control interval
     control_interval = (OptoStimProtocol() & key).fetch1("control_intervals")
@@ -435,8 +446,12 @@ def get_control_test_power_spectrum_full_probe(
             [],
             [],
         )
-    optogenetic_run_interval = Interval(np.array(run_intervals)).intersect(np.array(test_interval)).times
-    control_run_interval = Interval(np.array(run_intervals)).intersect(np.array(control_interval)).times
+    optogenetic_run_interval = (
+        Interval(np.array(run_intervals)).intersect(np.array(test_interval)).times
+    )
+    control_run_interval = (
+        Interval(np.array(run_intervals)).intersect(np.array(control_interval)).times
+    )
 
     # Begin analysis
     basic_key = {
@@ -487,8 +502,12 @@ def get_control_test_power_spectrum_full_probe(
             [],
             [],
         )
-    optogenetic_run_interval = Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
-    control_run_interval = Interval(control_run_interval).intersect(non_noise_intervals).times
+    optogenetic_run_interval = (
+        Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
+    )
+    control_run_interval = (
+        Interval(control_run_interval).intersect(non_noise_intervals).times
+    )
 
     window_size = int(np.round(window / np.mean(np.diff(lfp_timestamps))))
     # load the stimulus data if requested
@@ -2018,7 +2037,9 @@ def lfp_power_dynamics_pulse_cwt_spectrogram(
                 restrict_intervals = (OptoStimProtocol & stim_key).fetch1(
                     "control_intervals"
                 )
-            valid_intervals = Interval(valid_intervals).intersect(np.array(restrict_intervals)).times
+            valid_intervals = (
+                Interval(valid_intervals).intersect(np.array(restrict_intervals)).times
+            )
             valid_intervals = [
                 interval
                 for interval in valid_intervals

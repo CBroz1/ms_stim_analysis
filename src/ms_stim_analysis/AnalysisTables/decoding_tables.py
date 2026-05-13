@@ -292,7 +292,11 @@ class RippleClusterlessDecodeAnalysis(SpyglassMixin, dj.Computed):
                 # int_e = np.digitize(interval[1], valid_intervals[:, 1]) + 1
                 int_s = inter_range_start_list[i]
                 int_e = inter_range_end_list[i]
-                ripple_valid = Interval(np.array([interval])).intersect(valid_intervals[int_s:int_e]).times
+                ripple_valid = (
+                    Interval(np.array([interval]))
+                    .intersect(valid_intervals[int_s:int_e])
+                    .times
+                )
                 ripple_length = interval[1] - interval[0]
                 valid_length = (
                     np.sum(np.diff(ripple_valid, axis=1).squeeze())

@@ -172,7 +172,9 @@ def opto_spiking_dynamics(
             cycle_start_intervals = []
             for t in cycle_start:
                 cycle_start_intervals.append([t, t + 1])
-            pulse_timepoints = Interval(cycle_start_intervals).contains(pulse_timepoints)
+            pulse_timepoints = Interval(cycle_start_intervals).contains(
+                pulse_timepoints
+            )
         elif "dummy_cycle" in marks:
             dummy_freq = int(marks.split("=")[-1])
             cycle_start = (OptoStimProtocol() & opto_key).get_cylcle_begin_timepoints(
@@ -582,7 +584,9 @@ def opto_spiking_dynamics_place_dependence(
             cycle_start_intervals = []
             for t in cycle_start:
                 cycle_start_intervals.append([t, t + 1])
-            pulse_timepoints = Interval(cycle_start_intervals).contains(pulse_timepoints)
+            pulse_timepoints = Interval(cycle_start_intervals).contains(
+                pulse_timepoints
+            )
         elif "dummy_cycle" in marks:
             dummy_freq = int(marks.split("=")[-1])
             cycle_start = (OptoStimProtocol() & opto_key).get_cylcle_begin_timepoints(
@@ -638,7 +642,9 @@ def opto_spiking_dynamics_place_dependence(
                     marks_counts_list[n_pos].append(len(pulse_ind))
                     continue
 
-                unit_spikes_restricted = Interval(interval_restrict).contains(unit_spikes)
+                unit_spikes_restricted = Interval(interval_restrict).contains(
+                    unit_spikes
+                )
                 vals = bin_spikes_around_marks(
                     unit_spikes_restricted, pulse_timepoints[pulse_ind], plot_rng
                 )
@@ -649,7 +655,9 @@ def opto_spiking_dynamics_place_dependence(
                 #         vals, int(gauss_smooth / np.mean(np.diff(histogram_bins)))
                 #     )
                 # break
-                unit_spikes_restricted = Interval(interval_restrict_shuffle).contains(unit_spikes)
+                unit_spikes_restricted = Interval(interval_restrict_shuffle).contains(
+                    unit_spikes
+                )
 
                 def alligned_binned_spike_func(marks):
                     return np.array(
@@ -1030,7 +1038,11 @@ def spiking_theta_distribution(
         # intersect with position-defined intervals
         if filter_ports:
             valid_position_intervals = filter_position_ports(pos_key)
-            run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
+            run_intervals = (
+                Interval(np.array(run_intervals))
+                .intersect(np.array(valid_position_intervals))
+                .times
+            )
 
         # define the test and control intervals
         spike_df = []
@@ -1224,9 +1236,7 @@ def place_field_analysis(
         )  # TODO: define more consistently
         occupancy_list = [
             np.histogram(
-                pos_df.position_x[
-                    Interval(restrict_interval).contains(pos_df.index)
-                ],
+                pos_df.position_x[Interval(restrict_interval).contains(pos_df.index)],
                 bins=rng,
             )[0]
             for restrict_interval in restrict_interval_list
@@ -1461,7 +1471,11 @@ def get_theta_peaks(key):
     if len(valid_position_intervals) == 0:
         return []
     # print("position", valid_position_intervals)
-    run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
+    run_intervals = (
+        Interval(np.array(run_intervals))
+        .intersect(np.array(valid_position_intervals))
+        .times
+    )
 
     # return the theta marks from these intervals
     return Interval(run_intervals).contains(marks)

@@ -396,7 +396,11 @@ def get_running_valid_intervals(
     # intersect with position-defined intervals
     if filter_ports:
         valid_position_intervals = filter_position_ports(pos_key, dlc_pos=dlc_pos)
-        run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
+        run_intervals = (
+            Interval(np.array(run_intervals))
+            .intersect(np.array(valid_position_intervals))
+            .times
+        )
     if not seperate_optogenetics:
         return run_intervals
 
@@ -406,8 +410,12 @@ def get_running_valid_intervals(
     if len(control_interval) == 0 or len(test_interval) == 0:
         print(f"Warning: no optogenetic intervals found for {pos_key}")
         return np.array([]), np.array([])
-    optogenetic_run_interval = Interval(np.array(run_intervals)).intersect(np.array(test_interval)).times
-    control_run_interval = Interval(np.array(run_intervals)).intersect(np.array(control_interval)).times
+    optogenetic_run_interval = (
+        Interval(np.array(run_intervals)).intersect(np.array(test_interval)).times
+    )
+    control_run_interval = (
+        Interval(np.array(run_intervals)).intersect(np.array(control_interval)).times
+    )
     return optogenetic_run_interval, control_run_interval
 
 

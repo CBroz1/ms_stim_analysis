@@ -49,7 +49,11 @@ class TrialIntervals(SpyglassMixin, dj.Computed):
         trial_durations = []
         trial_intervals = []
         for i in range(poke_times.size - 1):
-            travel_ = Interval(np.array([[poke_times[i], poke_times[i + 1]]])).intersect(travel_intervals).times
+            travel_ = (
+                Interval(np.array([[poke_times[i], poke_times[i + 1]]]))
+                .intersect(travel_intervals)
+                .times
+            )
             # if not len(travel_) == 1:
             #     raise ValueError("A trial should have exactly one interval")
             if not len(travel_):

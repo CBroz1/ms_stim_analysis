@@ -169,7 +169,11 @@ def autocorrelegram(
                     test_interval,
                 ]
             ):
-                valid_interval = Interval(np.array(interval)).intersect(np.array(run_intervals)).times
+                valid_interval = (
+                    Interval(np.array(interval))
+                    .intersect(np.array(run_intervals))
+                    .times
+                )
                 vals = unit_autocorrelegram(spikes, histogram_bins, valid_interval)
 
                 results[i].append(vals)

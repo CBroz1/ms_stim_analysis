@@ -355,10 +355,16 @@ def crosscorrelegram(
                 absolute_bin_index = np.array(
                     [np.arange(bins.size) for _ in range(x.size)]
                 ).ravel()
-                valid_interval = Interval(np.array(interval)).intersect(np.array(run_intervals)).times
+                valid_interval = (
+                    Interval(np.array(interval))
+                    .intersect(np.array(run_intervals))
+                    .times
+                )
                 valid_interval = interval
                 valid_bin_index = absolute_bin_index[
-                    Interval(valid_interval).contains(absolute_bin_times, as_indices=True)
+                    Interval(valid_interval).contains(
+                        absolute_bin_times, as_indices=True
+                    )
                 ]
                 valid_bin_count.append(
                     np.bincount(valid_bin_index, minlength=bins.size)
@@ -524,7 +530,9 @@ def crosscorrelegram_stimulus_only(
         stimulating_intervals = np.array(
             [[s - 0.02, e + 0.02] for s, e in zip(t_on, t_off)]
         )
-        run_intervals_stim_only = Interval(np.array(run_intervals)).intersect(stimulating_intervals).times
+        run_intervals_stim_only = (
+            Interval(np.array(run_intervals)).intersect(stimulating_intervals).times
+        )
 
         histogram_bins = np.arange(-0.1, 0.1, 0.0001)
         print("number_units", len(spike_df.spike_times.values))
@@ -569,7 +577,9 @@ def crosscorrelegram_stimulus_only(
                         / np.sum(
                             [
                                 e - s
-                                for s, e in Interval(np.array(interval)).intersect(run_intervals_stim_only).times
+                                for s, e in Interval(np.array(interval))
+                                .intersect(run_intervals_stim_only)
+                                .times
                             ]
                         )
                     )
