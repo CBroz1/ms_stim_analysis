@@ -14,7 +14,7 @@ from spyglass.common import (
     ElectrodeGroup,
     get_electrode_indices,
 )
-from spyglass.common.common_interval import interval_list_intersect
+from spyglass.common.common_interval import Interval
 from spyglass.lfp.v1 import (
     LFPElectrodeGroup,
     LFPV1,
@@ -219,9 +219,7 @@ def get_control_test_power_spectrum(
                 [],
                 [],
             )
-        run_intervals = interval_list_intersect(
-            np.array(run_intervals), np.array(valid_position_intervals)
-        )
+        run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
 
     from .utils import get_running_valid_intervals
 
@@ -286,12 +284,8 @@ def get_control_test_power_spectrum(
             [],
             [],
         )
-    optogenetic_run_interval = interval_list_intersect(
-        optogenetic_run_interval, non_noise_intervals
-    )
-    control_run_interval = interval_list_intersect(
-        control_run_interval, non_noise_intervals
-    )
+    optogenetic_run_interval = Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
+    control_run_interval = Interval(control_run_interval).intersect(non_noise_intervals).times
 
     window_size = int(np.round(window / np.mean(np.diff(lfp_timestamps))))
     # load the stimulus data if requested
@@ -427,9 +421,7 @@ def get_control_test_power_spectrum_full_probe(
                 [],
                 [],
             )
-        run_intervals = interval_list_intersect(
-            np.array(run_intervals), np.array(valid_position_intervals)
-        )
+        run_intervals = Interval(np.array(run_intervals)).intersect(np.array(valid_position_intervals)).times
 
     # # determine if each interval is in the optogenetic control interval
     control_interval = (OptoStimProtocol() & key).fetch1("control_intervals")
@@ -443,12 +435,8 @@ def get_control_test_power_spectrum_full_probe(
             [],
             [],
         )
-    optogenetic_run_interval = interval_list_intersect(
-        np.array(run_intervals), np.array(test_interval)
-    )
-    control_run_interval = interval_list_intersect(
-        np.array(run_intervals), np.array(control_interval)
-    )
+    optogenetic_run_interval = Interval(np.array(run_intervals)).intersect(np.array(test_interval)).times
+    control_run_interval = Interval(np.array(run_intervals)).intersect(np.array(control_interval)).times
 
     # Begin analysis
     basic_key = {
@@ -499,12 +487,8 @@ def get_control_test_power_spectrum_full_probe(
             [],
             [],
         )
-    optogenetic_run_interval = interval_list_intersect(
-        optogenetic_run_interval, non_noise_intervals
-    )
-    control_run_interval = interval_list_intersect(
-        control_run_interval, non_noise_intervals
-    )
+    optogenetic_run_interval = Interval(optogenetic_run_interval).intersect(non_noise_intervals).times
+    control_run_interval = Interval(control_run_interval).intersect(non_noise_intervals).times
 
     window_size = int(np.round(window / np.mean(np.diff(lfp_timestamps))))
     # load the stimulus data if requested
@@ -2034,9 +2018,7 @@ def lfp_power_dynamics_pulse_cwt_spectrogram(
                 restrict_intervals = (OptoStimProtocol & stim_key).fetch1(
                     "control_intervals"
                 )
-            valid_intervals = interval_list_intersect(
-                valid_intervals, np.array(restrict_intervals)
-            )
+            valid_intervals = Interval(valid_intervals).intersect(np.array(restrict_intervals)).times
             valid_intervals = [
                 interval
                 for interval in valid_intervals
